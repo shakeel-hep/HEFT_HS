@@ -7,7 +7,7 @@
 CellPrint[TextCell["A Mathematica code to generate Hilbert Series.
 Authors:  Rodrigo Alonso & Shakeel Ur Rahaman  
 IPPP, Durham University                 
-arxiv [2412.XXXXX]",CellFrame->True(*,CellMargins->{{10, 800}, {10, 10}}*),Background->Purple,FontSize->20,FontColor->White]];
+arxiv [2412.09463]",CellFrame->True(*,CellMargins->{{10, 800}, {10, 10}}*),Background->Purple,FontSize->20,FontColor->White]];
 
 
 (* ::Input::Initialization:: *)
