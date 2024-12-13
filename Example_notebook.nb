@@ -1,0 +1,463 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     21695,        455]
+NotebookOptionsPosition[     20438,        430]
+NotebookOutlinePosition[     20832,        446]
+CellTagsIndexPosition[     20789,        443]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Quit", "[", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.940588017437004*^9, 3.940588020000285*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"f6598f3b-7000-4149-b123-546f3af16582"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], "\n", 
+ RowBox[{"<<", "code.m"}]}], "Input",
+ CellChangeTimes->{{3.940498683011765*^9, 3.9404986921051064`*^9}, 
+   3.9405880250673923`*^9, {3.940917701772335*^9, 3.9409177018578043`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"67cf7971-5aba-42be-a56e-ecb912edcce3"],
+
+Cell["\<\
+A Mathematica code to generate Hilbert Series.
+Authors:  Rodrigo Alonso & Shakeel Ur Rahaman  
+IPPP, Durham University                 
+arxiv [2412.XXXXX]\
+\>",
+ CellFrame->True,
+ GeneratedCell->True,
+ CellAutoOverwrite->True,
+ CellChangeTimes->{3.941781987036783*^9},
+ FontSize->20,
+ FontColor->GrayLevel[1],
+ Background->RGBColor[
+  0.5, 0, 0.5],ExpressionUUID->"8571e8df-1278-48e3-a345-3dd592e0fe85"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {Cell["HEFT:",ExpressionUUID->"bff7ee57-868a-47ce-90ee-fbc559f1da89"], 
+     Cell[" ",ExpressionUUID->"ba42cdf4-0fc5-4fce-83e7-a6247268b678"], Cell[
+     "   ",ExpressionUUID->"19d303d8-f9a8-47ca-be98-917fb98af4b4"], Cell[
+     "SMEFT:",ExpressionUUID->"b8da27a0-b09e-4b63-9beb-ec0c985375f2"], Cell[
+     " ",ExpressionUUID->"4e42fd60-edcf-462e-80e6-206ddb577b08"]},
+    {Cell["h",ExpressionUUID->"698a6198-d595-4570-b339-892720cef68d"], Cell[
+     "Physical Higgs.",ExpressionUUID->
+      "5e8cd6fc-bf49-4e06-82d9-d864e5198cbe"], Cell[
+     "   ",ExpressionUUID->"0f4100e0-7bfd-4cdd-84ff-c83147d14edd"], Cell[
+     "H(d)",ExpressionUUID->"31e9c187-075f-46bb-8aea-4313c34f92f3"], Cell[
+     "Higgs Doublet (its conjugate).",ExpressionUUID->
+      "d8726adc-d373-4612-b979-4b0703716873"]},
+    {Cell["Vp",ExpressionUUID->"1b4c2781-41e4-4f5a-ac8d-d370bd77bf56"], Cell[
+     "(+) goldstone",ExpressionUUID->"f9b9a79a-1766-442f-be63-49491fb4e702"], 
+     Cell["   ",ExpressionUUID->"ad0650d2-d611-426a-be39-8586b554ac70"], Cell[
+     "LL(d)",ExpressionUUID->"0fa7474d-7d93-4ccb-8662-50d132afbb98"], Cell[
+     "Left handed lepton doublet (its conjugate).",ExpressionUUID->
+      "67316876-e914-4ade-afff-9241f3c80c20"]},
+    {Cell["Vm",ExpressionUUID->"10074637-9766-450a-b4f0-4ac4c6e2e85f"], Cell[
+     "(-) goldstone.",ExpressionUUID->"419fbbdf-c719-4dae-8102-9ca9cdb9a477"],
+      Cell["   ",ExpressionUUID->"5d9fce0d-528e-4924-8069-06f3338b62d1"], 
+     Cell["QL(d):",ExpressionUUID->"e6a4a112-23ee-4916-b423-ca30592b3f7f"], 
+     Cell["Left handed quark doublet (its conjugate).",ExpressionUUID->
+      "a50494f1-c3e9-4567-abe5-f148dd465ef1"]},
+    {Cell["Vz",ExpressionUUID->"b370b3f6-5912-40ca-b939-34700e68a898"], Cell[
+     "Neutral goldstone boson.",ExpressionUUID->
+      "cbd5257c-cce1-4f94-a930-d7fff54567e7"], Cell[
+     "   ",ExpressionUUID->"b86f5a25-3e6b-4cf7-940f-4adcab732e1c"], Cell[
+     "",ExpressionUUID->"a3334561-9a62-49ac-8176-ea954616b444"], Cell[
+     "",ExpressionUUID->"fa0335e8-edec-40a5-8160-bb3697754b31"]},
+    {Cell["eL(d)",ExpressionUUID->"3020e8c5-6c45-4ef6-8bfc-cc9ca8460bc1"], 
+     Cell["Left handed electron (its conjugate).",ExpressionUUID->
+      "ba20bb95-678a-430a-b7c0-4986cb5d942c"], Cell[
+     "   ",ExpressionUUID->"9585bd50-9c69-42aa-a75c-1b723068a0a5"], Cell[
+     "",ExpressionUUID->"3a44f483-efcf-4119-816f-713ebdc95d96"], Cell[
+     "",ExpressionUUID->"a71dada8-c9d6-4849-b827-9bada3fbd323"]},
+    {Cell["\[Nu]L(d)",ExpressionUUID->"be2cd6fb-7a77-456d-8f8b-f2388d44021c"],
+      Cell["Left handed neutrino (its conjugate).",ExpressionUUID->
+      "bef251f5-ed37-4ade-8f1a-9e09b39bb4c2"], Cell[
+     "   ",ExpressionUUID->"d9fd0efc-6735-4593-a29d-57160161b7e5"], Cell[
+     "",ExpressionUUID->"0591fa22-d6b9-4ffe-be44-f2b87ffff5d0"], Cell[
+     "",ExpressionUUID->"ee0fb0ae-119e-4ffa-b6ef-1437a3af33ba"]},
+    {Cell["eR(d)",ExpressionUUID->"da81eca3-255c-4862-ac03-addbf8f19d86"], 
+     Cell["Right handed electron (its conjugate).",ExpressionUUID->
+      "b844e5b8-ebb9-450f-b87a-f898f5e0447b"], Cell[
+     "   ",ExpressionUUID->"c49ba780-9953-4f14-9086-97fe8d8d24ab"], Cell[
+     "eR(d)",ExpressionUUID->"3b28f648-2b1c-4467-9274-9eb0ec583dc9"], Cell[
+     "Right handed electron (its conjugate).",ExpressionUUID->
+      "46ec6bfd-4d18-4526-a8c8-5deb8e39d178"]},
+    {Cell["uL(d)",ExpressionUUID->"0f45f42a-32d3-4f39-a4fd-75493b5f5a6f"], 
+     Cell["Left handed up quark (its conjugate).",ExpressionUUID->
+      "46f6a96a-66fe-449b-8f3c-63838d20568c"], Cell[
+     "   ",ExpressionUUID->"d79182ca-dedd-417c-becd-917af33a4712"], Cell[
+     "",ExpressionUUID->"433472e3-3d0c-48b1-875f-75cf6c02b59c"], Cell[
+     "",ExpressionUUID->"881fb16f-26be-43e4-98f5-f89945e05c78"]},
+    {Cell["uR(d)",ExpressionUUID->"a9f842c9-ec76-4172-a223-b7b4908af20f"], 
+     Cell["Right handed up quark (its conjugate).",ExpressionUUID->
+      "97900b49-3d4f-43e3-8689-bdced1d204b1"], Cell[
+     "   ",ExpressionUUID->"c4fc9b3e-3ac3-4884-ac8e-d5a59d6cc686"], Cell[
+     "uR(d)",ExpressionUUID->"ec8b1e1a-050f-4eec-af34-e9f1c8a79d14"], Cell[
+     "Right handed up quark (its conjugate).",ExpressionUUID->
+      "3e0aa469-8e0d-497f-97dc-53bfe8299812"]},
+    {Cell["dL(d)",ExpressionUUID->"94518fc0-8649-440d-9987-a772d10e8414"], 
+     Cell["Left handed down quark (its conjugate).",ExpressionUUID->
+      "f5df8b3d-4af2-43ce-a67a-3a38b649e7e6"], Cell[
+     "   ",ExpressionUUID->"ed343a4f-0864-4657-b507-53d3d16674e5"], Cell[
+     "",ExpressionUUID->"4d9daa69-c0b2-4b0c-b4e0-4d43520b3336"], Cell[
+     "",ExpressionUUID->"ac20d389-37af-42ea-a3df-f8851ace67fe"]},
+    {Cell["dR(d)",ExpressionUUID->"be35b2d3-4ad0-46d0-aa7d-ba5b95dcc64a"], 
+     Cell["Right handed down quark (its conjugate).",ExpressionUUID->
+      "cd2074de-cd02-4c00-bd24-068664fad2ca"], Cell[
+     "   ",ExpressionUUID->"cc05bba0-4a33-4e0a-bc4b-9b867d6f0a3c"], Cell[
+     "dR(d)",ExpressionUUID->"b0f94586-11d6-413b-9796-884f9f73a036"], Cell[
+     "Right handed down quark (its conjugate).",ExpressionUUID->
+      "142ce699-216e-43b6-8d0e-6b396a23adca"]},
+    {Cell["GL",ExpressionUUID->"e5e9ea7f-f164-4893-8a32-cadefc430bf5"], Cell[
+     "Left handed SU(3)field strength tensor.",ExpressionUUID->
+      "4a6e4a09-a3f8-4c6b-9300-0fa78a9f0907"], Cell[
+     "   ",ExpressionUUID->"ab338927-00b6-4798-b9ab-bd0d3a9e90aa"], Cell[
+     "GL",ExpressionUUID->"54a36a99-4421-4b23-acaa-302b2983c5b9"], Cell[
+     "Left handed SU(3)field strength tensor.",ExpressionUUID->
+      "3181aa3c-34b5-44dd-9650-f9614b9bf069"]},
+    {Cell["GR",ExpressionUUID->"8589f4ac-7f75-41c6-aa76-bae9aaef6603"], Cell[
+     "Right handed SU(3)field strength tensor.",ExpressionUUID->
+      "568eda97-c62c-43a5-976c-fec6d143adef"], Cell[
+     "   ",ExpressionUUID->"c9a82b2c-22d9-4753-bf9f-df736e9067c8"], Cell[
+     "GR",ExpressionUUID->"b886db01-f07c-4e30-87d9-683a2b60625f"], Cell[
+     "Right handed SU(3)field strength tensor.",ExpressionUUID->
+      "b96a37f0-2bfd-404c-954d-e731f6bbd8a5"]},
+    {Cell["WpL",ExpressionUUID->"eaad12bc-317e-4f1d-a37d-9a5653d61d0d"], Cell[
+     "Left handed (+) W boson field strength tensor.",ExpressionUUID->
+      "f8b99f1e-d2f5-41c2-a1b4-ed752a3df6bb"], Cell[
+     "   ",ExpressionUUID->"8f78f554-110d-470c-a538-653bbb3e6577"], Cell[
+     "WL",ExpressionUUID->"31668751-5790-49d5-acf9-553942795efb"], Cell[
+     "Left handed W boson field strength tensor.",ExpressionUUID->
+      "ece22b19-025e-452f-b2b1-f1e284cf6b5b"]},
+    {Cell["WpR",ExpressionUUID->"78540ec0-863c-4d4f-b9dc-c8731bea49b9"], Cell[
+     "Right handed (+) W boson field strength tensor.",ExpressionUUID->
+      "b7bd5d40-176f-4991-86b9-2c9005b86978"], Cell[
+     "   ",ExpressionUUID->"6f788a03-201c-4113-92ae-edf9a67f8c80"], Cell[
+     "WR",ExpressionUUID->"207a2f62-c35a-4145-9337-52c1661d303b"], Cell[
+     "Right handed W boson field strength tensor.",ExpressionUUID->
+      "52a15e93-3196-4238-bfbf-51f252b91bb7"]},
+    {Cell["WmL",ExpressionUUID->"4f0e9622-05f7-4341-a60c-b47abecea84c"], Cell[
+     "Left handed (-) W boson field strength tensor.",ExpressionUUID->
+      "5f4f5f8d-94a0-4b82-b917-d9ae8047b84f"], Cell[
+     "   ",ExpressionUUID->"74fa15a6-6af1-4491-9514-ddef983240bb"], Cell[
+     "BL",ExpressionUUID->"b9b3e15a-3d35-4638-bb5b-25473193cd96"], Cell[
+     "Left handed B field strength tensor.",ExpressionUUID->
+      "f5eb40ac-cf10-4116-a9d8-ee66d0d9335f"]},
+    {Cell["WmR",ExpressionUUID->"dfae13c2-6122-4d8e-beb8-787ec7af0ccd"], Cell[
+     "Right handed (-) W boson field strength tensor.",ExpressionUUID->
+      "eb94ee68-44e0-4a1f-b29b-7091f352bd63"], Cell[
+     "   ",ExpressionUUID->"d0b987f0-ac83-412b-81b0-2b10f8b7df02"], Cell[
+     "BR",ExpressionUUID->"c6e785ad-b6af-4422-8ae3-e3d350daf2ef"], Cell[
+     "Right handed B field strength tensor.",ExpressionUUID->
+      "cc456ac5-029b-447f-a6bf-246fa3cc4864"]},
+    {Cell["ZL",ExpressionUUID->"31c5f727-d087-48b1-8197-e15273594cd4"], Cell[
+     "Left handed Z boson field strength tensor.",ExpressionUUID->
+      "69608e89-096d-42e7-bfca-2cb641f4d097"], Cell[
+     "   ",ExpressionUUID->"d6ed7b91-767f-48dc-8cb5-233b816a06d4"], Cell[
+     "",ExpressionUUID->"ef111abe-e7cb-4d90-8975-f5ec1ab606e1"], Cell[
+     "",ExpressionUUID->"5323adce-1e6c-4e82-9947-11dc5d278400"]},
+    {Cell["ZR",ExpressionUUID->"027653d1-b151-4569-97e5-b70240552533"], Cell[
+     "Right handed Z boson field strength tensor.",ExpressionUUID->
+      "aea24341-9239-42b7-bd26-20991b55dd91"], Cell[
+     "   ",ExpressionUUID->"04c48985-f7e5-4315-80d8-d0561fdb0250"], Cell[
+     "",ExpressionUUID->"cd38d164-0770-4993-9160-7017a442dcd2"], Cell[
+     " *** Generic Field names to define operator classes ***",ExpressionUUID->
+      "42995484-d0e2-407b-ab2c-615975412956"]},
+    {Cell["AL",ExpressionUUID->"b7548e68-802b-4276-b2ee-1ccb59ddc3b0"], Cell[
+     "Left handed photon field strength tensor.",ExpressionUUID->
+      "4b98bf12-3e1e-4aa0-ac42-18d9297351d0"], Cell[
+     "   ",ExpressionUUID->"1f14c6eb-45d8-4eb7-9333-d2ef86df0e18"], Cell[
+     "S",ExpressionUUID->"b770c798-a173-420c-9234-002fdccfbef5"], Cell[
+     "Scalar field",ExpressionUUID->"1409dd72-ca6c-4a2f-9b7a-92ee7222bbad"]},
+    {Cell["AR",ExpressionUUID->"cb7a9075-fcbf-4750-98c9-077063d9a4f6"], Cell[
+     "Right handed photon field strength tensor.",ExpressionUUID->
+      "0ae769e1-65c3-4c57-bd74-7adf282f037f"], Cell[
+     "   ",ExpressionUUID->"a643ed14-a814-4ca3-bb12-e72970067d47"], Cell[
+     "F",ExpressionUUID->"2f09635d-4911-4d51-b1b5-bfa6e42b92d6"], Cell[
+     "Fermion Field",ExpressionUUID->
+      "3cfd7c58-c854-4dc0-9c80-e5136e6224b0"]},
+    {Cell["U(d)",ExpressionUUID->"65a2f7dc-fddc-4bab-bc4b-157af5b0be4f"], 
+     Cell["Spurion (its conjugate).",ExpressionUUID->
+      "08be47ba-3990-48a9-97f0-2432f00804fb"], Cell[
+     "   ",ExpressionUUID->"e7b1cdc6-1eef-4ec7-865d-ae4952daa192"], Cell[
+     "X",ExpressionUUID->"caad4df0-483f-43a2-8058-948928b9f80c"], Cell[
+     "Field Strenght tensor",ExpressionUUID->
+      "a573204e-cff5-43c2-96b1-7e926ece6ac8"]},
+    {Cell["V",ExpressionUUID->"1fbb245f-8542-4518-a01a-3a05c0eb08cc"], Cell[
+     "Goldstone in Linear representation.",ExpressionUUID->
+      "6c969c0d-00ae-4e54-a747-d95e2d4330bc"], Cell[
+     "   ",ExpressionUUID->"b6943759-bb64-4195-ae13-f74eb6d14dfe"], Cell[
+     "\[DoubleStruckCapitalD]",ExpressionUUID->
+      "6acbec9e-d1ab-444a-adac-3efdbc050dc0"], Cell[
+     "Covariant Derivative",ExpressionUUID->
+      "12930613-1110-4124-8165-525ac0658362"]}
+   },
+   AutoDelete->False,
+   FrameStyle->GrayLevel[0],
+   GridBoxAlignment->{"Columns" -> {{Center}}, "Rows" -> {{Baseline}}},
+   GridBoxBackground->{"Columns" -> {{
+        RGBColor[0.94, 0.91, 0.88]}}},
+   GridBoxFrame->{"ColumnsIndexed" -> {{{1, -1}, {1, -1}} -> True}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "TextGrid"]],
+ GeneratedCell->True,
+ CellAutoOverwrite->True,
+ CellChangeTimes->{3.941781987068097*^9},
+ FontSize->10,ExpressionUUID->"9e5ac194-692f-4c54-bd5a-fb091c0734d5"],
+
+Cell["\<\
+Use the commands:  HEFT[n], SMEFT[n], HEFTModded[n], HEFTSpurion[n] to \
+Generate the outputs.
+
+To match results with [2211.06275] one can further use the replacement rule:  \
+XcheckList
+
+To get a counting of the operators one can use the  Counting[expr_] on the \
+expression of the Hilbert series output.\
+\>", "Text",
+ CellChangeTimes->{{3.940587187860159*^9, 3.940587226646616*^9}, {
+  3.9405873670156593`*^9, 3.94058746447908*^9}, {3.9409177423088617`*^9, 
+  3.9409180052138767`*^9}},
+ Background->RGBColor[
+  0.94, 0.91, 0.88],ExpressionUUID->"35a27ac6-6c3f-4faf-914f-2569a5e109f3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"HEFT", "[", "4", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Counting", "[", "%", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%%", "/.", "XcheckList"}]}], "Input",
+ CellChangeTimes->{{3.9409180261212263`*^9, 3.94091805772602*^9}},
+ CellLabel->"In[3]:=",ExpressionUUID->"3a3c2761-007e-4e3f-bd9d-9fc639b22e68"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Time taken: \"\>", "\[InvisibleSpace]", "5.759533`"}],
+  SequenceForm["Time taken: ", 5.759533],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.940918081006619*^9},
+ CellLabel->
+  "During evaluation of \
+In[3]:=",ExpressionUUID->"dfe2d332-3eba-41bf-8825-aaf94ff5aebc"],
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["AL", "2"], "+", 
+  SuperscriptBox["AR", "2"], "+", 
+  SuperscriptBox["GL", "2"], "+", 
+  SuperscriptBox["GR", "2"], "+", 
+  SuperscriptBox["h", "4"], "+", 
+  RowBox[{"dLd", " ", "dR", " ", "h", " ", 
+   SuperscriptBox["nd", "2"]}], "+", 
+  RowBox[{"dL", " ", "dRd", " ", "h", " ", 
+   SuperscriptBox["nd", "2"]}], "+", 
+  RowBox[{"eLd", " ", "eR", " ", "h", " ", 
+   SuperscriptBox["ne", "2"]}], "+", 
+  RowBox[{"eL", " ", "eRd", " ", "h", " ", 
+   SuperscriptBox["ne", "2"]}], "+", 
+  RowBox[{"h", " ", 
+   SuperscriptBox["nu", "2"], " ", "uLd", " ", "uR"}], "+", 
+  RowBox[{"h", " ", 
+   SuperscriptBox["nu", "2"], " ", "uL", " ", "uRd"}], "+", 
+  RowBox[{"dLd", " ", "nd", " ", "nu", " ", "uL", " ", "Vm"}], "+", 
+  RowBox[{"dRd", " ", "nd", " ", "nu", " ", "uR", " ", "Vm"}], "+", 
+  RowBox[{"dL", " ", "nd", " ", "nu", " ", "uLd", " ", "Vp"}], "+", 
+  RowBox[{"dR", " ", "nd", " ", "nu", " ", "uRd", " ", "Vp"}], "+", 
+  RowBox[{"AL", " ", "Vm", " ", "Vp"}], "+", 
+  RowBox[{"AR", " ", "Vm", " ", "Vp"}], "+", 
+  RowBox[{
+   SuperscriptBox["h", "2"], " ", "Vm", " ", "Vp"}], "+", 
+  RowBox[{"2", " ", 
+   SuperscriptBox["Vm", "2"], " ", 
+   SuperscriptBox["Vp", "2"]}], "+", 
+  RowBox[{"dL", " ", "dLd", " ", 
+   SuperscriptBox["nd", "2"], " ", "Vz"}], "+", 
+  RowBox[{"dR", " ", "dRd", " ", 
+   SuperscriptBox["nd", "2"], " ", "Vz"}], "+", 
+  RowBox[{"eL", " ", "eLd", " ", 
+   SuperscriptBox["ne", "2"], " ", "Vz"}], "+", 
+  RowBox[{"eR", " ", "eRd", " ", 
+   SuperscriptBox["ne", "2"], " ", "Vz"}], "+", 
+  RowBox[{
+   SuperscriptBox["nu", "2"], " ", "uL", " ", "uLd", " ", "Vz"}], "+", 
+  RowBox[{
+   SuperscriptBox["nu", "2"], " ", "uR", " ", "uRd", " ", "Vz"}], "+", 
+  RowBox[{
+   SuperscriptBox["h", "2"], " ", 
+   SuperscriptBox["Vz", "2"]}], "+", 
+  RowBox[{"2", " ", "Vm", " ", "Vp", " ", 
+   SuperscriptBox["Vz", "2"]}], "+", 
+  SuperscriptBox["Vz", "4"], "+", 
+  RowBox[{"Vp", " ", "Vz", " ", "WmL"}], "+", 
+  RowBox[{"Vp", " ", "Vz", " ", "WmR"}], "+", 
+  RowBox[{"Vm", " ", "Vz", " ", "WpL"}], "+", 
+  RowBox[{"WmL", " ", "WpL"}], "+", 
+  RowBox[{"Vm", " ", "Vz", " ", "WpR"}], "+", 
+  RowBox[{"WmR", " ", "WpR"}], "+", 
+  RowBox[{"AL", " ", "ZL"}], "+", 
+  RowBox[{"Vm", " ", "Vp", " ", "ZL"}], "+", 
+  SuperscriptBox["ZL", "2"], "+", 
+  RowBox[{"AR", " ", "ZR"}], "+", 
+  RowBox[{"Vm", " ", "Vp", " ", "ZR"}], "+", 
+  SuperscriptBox["ZR", "2"], "+", 
+  RowBox[{"dL", " ", "dLd", " ", 
+   SuperscriptBox["nd", "2"], " ", "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{"dR", " ", "dRd", " ", 
+   SuperscriptBox["nd", "2"], " ", "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{"eL", " ", "eLd", " ", 
+   SuperscriptBox["ne", "2"], " ", "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{"eR", " ", "eRd", " ", 
+   SuperscriptBox["ne", "2"], " ", "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{
+   SuperscriptBox["nu", "2"], " ", "uL", " ", "uLd", " ", 
+   "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{
+   SuperscriptBox["nu", "2"], " ", "uR", " ", "uRd", " ", 
+   "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{
+   SuperscriptBox["h", "2"], " ", 
+   SuperscriptBox["\[DoubleStruckCapitalD]", "2"]}], "+", 
+  RowBox[{"eLd", " ", "ne", " ", "n\[Nu]", " ", "Vm", " ", "\[Nu]L"}], "+", 
+  RowBox[{"eR", " ", "ne", " ", "n\[Nu]", " ", "Vp", " ", "\[Nu]L"}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", "n\[Nu]", " ", 
+   SuperscriptBox["\[Nu]L", "2"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", 
+   SuperscriptBox["n\[Nu]", "2"], " ", 
+   SuperscriptBox["\[Nu]L", "2"]}], "+", 
+  RowBox[{"eRd", " ", "ne", " ", "n\[Nu]", " ", "Vm", " ", "\[Nu]Ld"}], "+", 
+  RowBox[{"eL", " ", "ne", " ", "n\[Nu]", " ", "Vp", " ", "\[Nu]Ld"}], "+", 
+  RowBox[{
+   SuperscriptBox["n\[Nu]", "2"], " ", "Vz", " ", "\[Nu]L", " ", "\[Nu]Ld"}], 
+  "+", 
+  RowBox[{
+   SuperscriptBox["n\[Nu]", "2"], " ", "\[DoubleStruckCapitalD]", " ", 
+   "\[Nu]L", " ", "\[Nu]Ld"}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", "n\[Nu]", " ", 
+   SuperscriptBox["\[Nu]Ld", "2"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", 
+   SuperscriptBox["n\[Nu]", "2"], " ", 
+   SuperscriptBox["\[Nu]Ld", "2"]}]}]], "Output",
+ CellChangeTimes->{3.940918081077343*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"703003d2-5009-4cda-8299-195e0f6f0eb4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Total operators: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"27", "+", "nf", "+", 
+    RowBox[{"29", " ", 
+     SuperscriptBox["nf", "2"]}]}]}],
+  SequenceForm[
+  "Total operators: ", 27 + $CellContext`nf + 29 $CellContext`nf^2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.940918081078185*^9},
+ CellLabel->
+  "During evaluation of \
+In[3]:=",ExpressionUUID->"34423c0d-0b3a-4dc5-9c48-543140704534"],
+
+Cell[BoxData[
+ RowBox[{
+  SuperscriptBox["h", "4"], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", 
+   SuperscriptBox["L", "2"], " ", "nf"}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", 
+   SuperscriptBox["Lbar", "2"], " ", "nf"}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", 
+   SuperscriptBox["L", "2"], " ", 
+   SuperscriptBox["nf", "2"]}], "+", 
+  RowBox[{"2", " ", "h", " ", "L", " ", "Lbar", " ", 
+   SuperscriptBox["nf", "2"]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "h", " ", 
+   SuperscriptBox["Lbar", "2"], " ", 
+   SuperscriptBox["nf", "2"]}], "+", 
+  RowBox[{"4", " ", "h", " ", 
+   SuperscriptBox["nf", "2"], " ", "Q", " ", "Qbar"}], "+", 
+  RowBox[{
+   SuperscriptBox["L", "2"], " ", 
+   SuperscriptBox["nf", "2"], " ", "V"}], "+", 
+  RowBox[{"5", " ", "L", " ", "Lbar", " ", 
+   SuperscriptBox["nf", "2"], " ", "V"}], "+", 
+  RowBox[{
+   SuperscriptBox["Lbar", "2"], " ", 
+   SuperscriptBox["nf", "2"], " ", "V"}], "+", 
+  RowBox[{"8", " ", 
+   SuperscriptBox["nf", "2"], " ", "Q", " ", "Qbar", " ", "V"}], "+", 
+  RowBox[{"2", " ", 
+   SuperscriptBox["h", "2"], " ", 
+   SuperscriptBox["V", "2"]}], "+", 
+  RowBox[{"5", " ", 
+   SuperscriptBox["V", "4"]}], "+", 
+  RowBox[{"8", " ", 
+   SuperscriptBox["V", "2"], " ", "X"}], "+", 
+  RowBox[{"10", " ", 
+   SuperscriptBox["X", "2"]}], "+", 
+  RowBox[{"3", " ", "L", " ", "Lbar", " ", 
+   SuperscriptBox["nf", "2"], " ", "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{"4", " ", 
+   SuperscriptBox["nf", "2"], " ", "Q", " ", "Qbar", " ", 
+   "\[DoubleStruckCapitalD]"}], "+", 
+  RowBox[{
+   SuperscriptBox["h", "2"], " ", 
+   SuperscriptBox["\[DoubleStruckCapitalD]", "2"]}]}]], "Output",
+ CellChangeTimes->{3.9409180810787*^9},
+ CellLabel->"Out[5]=",ExpressionUUID->"3ce619e4-8fb8-40dd-8972-963d40d86f32"]
+}, Open  ]]
+},
+WindowSize->{726, 748},
+WindowMargins->{{131, Automatic}, {32, Automatic}},
+FrontEndVersion->"14.1 for Mac OS X ARM (64-bit) (July 16, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"61a9eb6e-cfc1-42c0-98a3-9c184c789d0f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 214, 4, 29, "Input",ExpressionUUID->"f6598f3b-7000-4149-b123-546f3af16582"],
+Cell[771, 26, 381, 7, 49, "Input",ExpressionUUID->"67cf7971-5aba-42be-a56e-ecb912edcce3"],
+Cell[1155, 35, 413, 13, 107, InheritFromParent,ExpressionUUID->"8571e8df-1278-48e3-a345-3dd592e0fe85"],
+Cell[1571, 50, 10985, 172, 374, InheritFromParent,ExpressionUUID->"9e5ac194-692f-4c54-bd5a-fb091c0734d5"],
+Cell[12559, 224, 597, 14, 180, "Text",ExpressionUUID->"35a27ac6-6c3f-4faf-914f-2569a5e109f3"],
+Cell[CellGroupData[{
+Cell[13181, 242, 345, 6, 70, "Input",ExpressionUUID->"3a3c2761-007e-4e3f-bd9d-9fc639b22e68"],
+Cell[13529, 250, 321, 8, 23, "Print",ExpressionUUID->"dfe2d332-3eba-41bf-8825-aaf94ff5aebc"],
+Cell[13853, 260, 4296, 102, 226, "Output",ExpressionUUID->"703003d2-5009-4cda-8299-195e0f6f0eb4"],
+Cell[18152, 364, 451, 12, 23, "Print",ExpressionUUID->"34423c0d-0b3a-4dc5-9c48-543140704534"],
+Cell[18606, 378, 1816, 49, 88, "Output",ExpressionUUID->"3ce619e4-8fb8-40dd-8972-963d40d86f32"]
+}, Open  ]]
+}
+]
+*)
+
