@@ -602,14 +602,21 @@ rl//Expand
 
 
 (* ::Input::Initialization:: *)
-HEFTngb[massdim_]:=Module[{list,result},
+HEFTngb[massdim_]:=Module[{list,result,rl},
 If[massdim>=1 && IntegerQ[massdim],
 PrintTemporary["Calculating Hilbert Series..."],
 Abort[]];
 list=Flatten[HEFTIntegrandModded[massdim]/.{Plus->List}];
 result=Timing[Plus@@ParallelMap[HaarIntegralHEFT,list]];
 Print["Time taken: ", result[[1]]];
-Expand[(result[[2]]+Coefficient[arg\[CapitalDelta]HMod,q,massdim])/.{GB->h*\[DoubleStruckCapitalD]}]
+If[massdim == 4, 
+  rl = Expand[(result[[2]] + 
+        Coefficient[arg\[CapitalDelta]HMod, q, massdim]) /. {GB -> 
+        h*\[DoubleStruckCapitalD]}] + KineticTermsHEFT, 
+  rl = (result[[2]] + 
+      Coefficient[arg\[CapitalDelta]HMod, q, massdim]) /. {GB -> 
+      h*\[DoubleStruckCapitalD]}];
+rl // Expand
 ];
 
 
